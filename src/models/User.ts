@@ -1,10 +1,5 @@
 import mongoose from "mongoose";
-interface IUser {
-    name: string;
-    email: string;
-    password: string;
-    createdAt: Date;
-}
+import { IUser } from "../entities/i.user.entity";
   
   const userSchema = new mongoose.Schema<IUser>({
     name: { type: String, required: true },

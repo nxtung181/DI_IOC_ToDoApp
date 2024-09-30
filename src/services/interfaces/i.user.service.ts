@@ -1,4 +1,4 @@
-import { IToken, IUser, IUserRes } from "../../entities/i.user.entity";
+import { IToken, IUserRes } from "../../entities/i.user.entity";
 
 export interface IUserService{
     signUp(name: string, email: string, password: String): Promise<void>;

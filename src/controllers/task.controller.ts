@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ITaskController } from "./interfaces/i.task.controller";
 import { ITaskService } from "../services/interfaces/i.task.service";
 import { ITask } from "../entities/i.task.entity";
+import Task from "../models/Task";
 
 export class TaskController implements ITaskController {
     private taskService: ITaskService
@@ -45,10 +46,9 @@ export class TaskController implements ITaskController {
             if (!title || !description) {
                 res.send({ message: "miss params" })
             }
-            const newTask: ITask = { title, description, createdAt, completeAt, status, user }
+            const newTask: Omit<ITask, '_id'> = { title, description, createdAt, completeAt, status, user }
             await this.taskService.createTask(newTask)
             res.status(200).send({ message: "Create Task Successfully" })
-
         } catch (e) {
             res.send(500).send({ message: 'Internal Server Error' })
         }
@@ -58,7 +58,7 @@ export class TaskController implements ITaskController {
         try {
             const taskId = req.params.id
             const { title, description, createdAt, completeAt, status } = req.body
-            const updatedTask: ITask = {
+            const updatedTask: Omit<ITask, '_id'> ={
                 title, description, createdAt, completeAt, status
             }
             await this.taskService.editTask(taskId, updatedTask)

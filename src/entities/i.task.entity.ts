@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 
 export interface ITask{
-    _id?: Types.ObjectId
+    _id: Types.ObjectId
     title: string;
     description: string;
     createdAt: Date;

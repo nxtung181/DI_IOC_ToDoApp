@@ -1,13 +1,5 @@
 import mongoose from "mongoose";
-
-interface ITask{
-    title: string;
-    description: string;
-    createdAt: Date;
-    completeAt: Date;
-    status: string;
-    user: mongoose.Types.ObjectId;
-}
+import { ITask } from "../entities/i.task.entity";
 
 const taskSchema = new mongoose.Schema<ITask>({
     title:{type: String, required: true},

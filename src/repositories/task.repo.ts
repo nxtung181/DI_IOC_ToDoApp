@@ -4,6 +4,7 @@ import Task from "../models/Task";
 import { ITaskRepository } from "./interfaces/i.task.repo";
 
 export class TaskRepository implements ITaskRepository{
+    
     public async getTasks(userId: Types.ObjectId, page: number, pageSize: number): Promise<ITask[] | null> {
         const tasks = await Task.find({user: userId, status: {$ne : 'deleted'}})
                                 .skip((page-1)*pageSize)
@@ -11,6 +12,7 @@ export class TaskRepository implements ITaskRepository{
                                 .lean()
         return tasks
     }
+
     public async deleteTask(taskId: string): Promise<void> {
        await Task.findOneAndUpdate({_id: taskId}, {status: 'deleted'})
     }
